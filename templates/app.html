@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#163A5F">
+  <title>Medicine Packaging Detector</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+  <script>
+    window.MPD_CONFIG = {{ {
+      "maxUploadBytes": max_upload_bytes,
+      "ocrMinConfidence": ocr_min_confidence
+    } | tojson }};
+  </script>
+  <script src="{{ url_for('static', filename='js/api.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</head>
+<body class="app-body">
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="/dashboard" aria-label="Medicine Packaging Detector dashboard">
+        <span class="brand-mark" aria-hidden="true">MP</span>
+        <span class="brand-copy">
+          <strong>MedVerify</strong>
+          <small>Packaging review</small>
+        </span>
+      </a>
+      <div class="sidebar-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <a href="/dashboard" data-nav="dashboard">
+          <span class="nav-icon" aria-hidden="true">▦</span><span>Dashboard</span>
+        </a>
+        <a href="/medicines" data-nav="medicines">
+          <span class="nav-icon" aria-hidden="true">▤</span><span>Medicine catalog</span>
+        </a>
+        <a href="/batches" data-nav="batches">
+          <span class="nav-icon" aria-hidden="true">▧</span><span>Batch tracking</span>
+        </a>
+        <a href="/users" data-nav="users" id="users-nav" hidden>
+          <span class="nav-icon" aria-hidden="true">♙</span><span>User management</span>
+        </a>
+        <a href="/audit" data-nav="audit" id="audit-nav" hidden>
+          <span class="nav-icon" aria-hidden="true">≡</span><span>Audit trail</span>
+        </a>
+        <a href="/inspections/new" data-nav="new-inspection">
+          <span class="nav-icon" aria-hidden="true">＋</span><span>New inspection</span>
+        </a>
+        <a href="/inspections" data-nav="history">
+          <span class="nav-icon" aria-hidden="true">◷</span><span>Inspection history</span>
+        </a>
+      </nav>
+      <div class="sidebar-note">
+        <span class="note-mark" aria-hidden="true">i</span>
+        <p>Screening prototype only. Review findings with a qualified professional.</p>
+      </div>
+      <div class="sidebar-footer">Medicine Packaging Detector</div>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobile-menu" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="topbar-context">
+          <span class="context-dot" aria-hidden="true"></span>
+          <span>Local verification workspace</span>
+        </div>
+        <div class="user-menu">
+          <div class="user-copy">
+            <strong id="user-name">Loading user</strong>
+            <small id="user-role">Authenticated session</small>
+          </div>
+          <span class="user-avatar" id="user-avatar" aria-hidden="true">U</span>
+          <button type="button" class="button button-quiet button-small" id="logout-button">Log out</button>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <div id="page-alert" class="alert" role="status" aria-live="polite" hidden></div>
+        <div id="page-content">
+          <div class="loading-panel"><span class="spinner"></span><span>Loading workspace…</span></div>
+        </div>
+      </main>
+      <footer class="app-footer">
+        For screening and verification support only. This prototype does not certify authenticity or safety.
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
